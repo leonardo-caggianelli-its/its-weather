@@ -1,0 +1,7 @@
+{
+  "name": "its-weather",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
