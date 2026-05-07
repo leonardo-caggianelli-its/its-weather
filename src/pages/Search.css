@@ -1,0 +1,9 @@
+.weather-search {
+    display: flex;
+    flex-direction: row;
+}
+.weather-search ion-button {
+    padding: 0 10px;
+    --padding-end: 20px;
+    --padding-start: 20px;
+}
