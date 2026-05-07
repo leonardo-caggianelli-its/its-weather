@@ -1,0 +1,43 @@
+.weather-card h4 {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.weather-card .weather-location {
+  color: gray;
+}
+
+.weather-card .weather-condition {
+  font-weight: 600;
+  color: black;
+}
+
+.weather-card .weather-temperature {
+  font-size: 48px;
+  font-weight: 700;
+  color: black;
+  margin-top: 20px;
+}
+
+.weather-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 20px;
+}
+
+.weather-details>div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.weather-details ion-icon {
+  font-size: 32px;
+}
+
+.weather-details div p:first-child {
+  color: black;
+  font-weight: 600;
+  text-transform: uppercase;
+}
