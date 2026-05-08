@@ -1,7 +1,7 @@
 import { CapacitorHttp, HttpResponse } from "@capacitor/core";
 import { OpenweatherGeolocation, OpenweatherWeather, WeatherProps } from "../interfaces/weather.interface";
 
-const apiKey = "d3f33ac3bb96540ed07f938d7d432442";
+const apiKey = "myapikey";
 const apiUrl = "https://api.openweathermap.org";
 const weatherEndpoint = "/data/2.5/weather";
 const geolocationEndpoint = "/geo/1.0/direct";
