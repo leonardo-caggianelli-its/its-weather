@@ -24,6 +24,8 @@ export interface OpenweatherWeather {
   wind: {
     speed: number;
   };
+  dt: number;
+  date: string;
   sys: {
     country: string;
   }

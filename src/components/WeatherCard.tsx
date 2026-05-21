@@ -17,8 +17,8 @@ const WeatherCard: React.FC<OpenweatherWeather> = (props: OpenweatherWeather) =>
           {props.weather ? props.weather.map((weather: {main: string; description: string}) => (
             <h4 className='ion-text-center ion-no-margin weather-condition'>{weather.main}</h4>
           )) : <p>Nessun meteo</p>}
-          <p>30-04-2026</p>
-          <p className='weather-temperature'>25°C</p>
+          <p>{props.date}</p>
+          <p className='weather-temperature'>{props.main.temp} °C</p>
         </div>
 
         <div className='weather-details'>
@@ -26,28 +26,28 @@ const WeatherCard: React.FC<OpenweatherWeather> = (props: OpenweatherWeather) =>
             <IonIcon aria-hidden="true" icon={leafOutline} />
             <div>
               <p>Wind</p>
-              <p>20 km/h</p>
+              <p>{props.wind.speed} km/h</p>
             </div>
           </div>
           <div className='weather-feels'>
             <IonIcon aria-hidden="true" icon={thermometerOutline} />
             <div>
               <p>Feels like</p>
-              <p>27.5°C</p>
+              <p>{props.main.feels_like} °C</p>
             </div>
           </div>
           <div className='weather-uv'>
             <IonIcon aria-hidden="true" icon={sunnyOutline} />
             <div>
-              <p>Index uv</p>
-              <p>2</p>
+              <p>Humidity</p>
+              <p>{props.main.humidity}%</p>
             </div>
           </div>
           <div className='weather-pressure'>
             <IonIcon aria-hidden="true" icon={pulseOutline} />
             <div>
               <p>Pressure</p>
-              <p>982mbar</p>
+              <p>{props.main.pressure}mbar</p>
             </div>
           </div>
         </div>

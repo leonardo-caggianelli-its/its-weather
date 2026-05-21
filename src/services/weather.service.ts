@@ -17,7 +17,6 @@ const getCoordinates = async (cityName: string): Promise<OpenweatherGeolocation>
                 appid: apiKey
             }
         });
-        console.log(response.data);
         return response.data;
     } catch (error) {
         console.error(error);
@@ -36,12 +35,25 @@ const getWeather = async (latitude: number, longitude: number): Promise<Openweat
                 appid: apiKey,
             }
         });
-        console.log(response.data);
-        return response.data;
+        let weather = response.data as OpenweatherWeather;
+        weather.date = timestampToDate(weather.dt);
+        weather.main.temp = kelvinToCelsius(weather.main.temp);
+        weather.main.feels_like = kelvinToCelsius(weather.main.feels_like);
+        console.log(weather)
+        return weather;
     } catch (error) {
         console.error(error);
         throw error;
     }
+}
+
+const kelvinToCelsius = (kelvin: number): number => {
+    return Math.round((kelvin - 273.15) * 10) / 10;
+}
+
+const timestampToDate = (timestamp: number): string => {
+    const date = new Date(timestamp * 1000);
+    return date.getDate().toString().padStart(2, "0") + "-" + (date.getMonth() + 1).toString().padStart(2, "0") + "-" + date.getFullYear();
 }
 
 const sleep = (ms: number) => {
