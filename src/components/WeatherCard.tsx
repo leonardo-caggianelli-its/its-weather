@@ -14,8 +14,8 @@ const WeatherCard: React.FC<OpenweatherWeather> = (props: OpenweatherWeather) =>
 
         <div className='ion-text-center ion-margin ion-padding'>
           <img src="/rain.png" width="75" height="75" />
-          {props.weather ? props.weather.map((weather: {main: string; description: string}) => (
-            <h4 className='ion-text-center ion-no-margin weather-condition'>{weather.main}</h4>
+          {props.weather ? props.weather.map((weather: {main: string; description: string}, index: number) => (
+            <h4 className='ion-text-center ion-no-margin weather-condition' key={index}>{weather.main}</h4>
           )) : <p>Nessun meteo</p>}
           <p>{props.date}</p>
           <p className='weather-temperature'>{props.main.temp} °C</p>
