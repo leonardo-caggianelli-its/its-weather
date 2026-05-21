@@ -1,7 +1,7 @@
 import { CapacitorHttp, HttpResponse } from "@capacitor/core";
 import { OpenweatherGeolocation, OpenweatherWeather, WeatherProps } from "../interfaces/weather.interface";
 
-const apiKey = "myapikey";
+const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY;
 const apiUrl = "https://api.openweathermap.org";
 const weatherEndpoint = "/data/2.5/weather";
 const geolocationEndpoint = "/geo/1.0/direct";
@@ -42,6 +42,10 @@ const getWeather = async (latitude: number, longitude: number): Promise<Openweat
         console.error(error);
         throw error;
     }
+}
+
+const sleep = (ms: number) => {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 export { getCoordinates, getWeather };

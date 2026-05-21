@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonText, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonSpinner, IonText, IonTitle, IonToolbar } from '@ionic/react';
 import './Dashboard.css';
 import WeatherCard from '../components/WeatherCard';
 import { useEffect, useRef, useState } from 'react';
@@ -43,7 +43,7 @@ const Dashboard: React.FC = () => {
           <IonText>Here's your location based weather</IonText>
         </p>
 
-        <WeatherCard {...weather} />
+        {weather ? <WeatherCard {...weather} /> : <IonSpinner name="circles"></IonSpinner>}
 
       </IonContent>
     </IonPage>
