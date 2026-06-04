@@ -1,21 +1,38 @@
-import { IonButton, IonContent, IonHeader, IonPage, IonSearchbar, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonPage, IonSearchbar, IonSpinner, IonTitle, IonToolbar } from '@ionic/react';
 import './Search.css';
 import WeatherCard from '../components/WeatherCard';
-import { WeatherProps } from '../interfaces/weather.interface';
-
-const weather: WeatherProps = {
-  city: 'Roma', 
-  country: '', 
-  weather_condition: '', 
-  date: '', 
-  weather_temperature: 0, 
-  weather_wind: 0, 
-  weather_feel_temperature: 0, 
-  weather_uv: 0, 
-  weather_pressure: 0
-}
+import { OpenweatherWeather, WeatherProps } from '../interfaces/weather.interface';
+import { useRef, useState, useEffect } from 'react';
+import { getCoordinates, getWeather } from '../services/weather.service';
 
 const Search: React.FC = () => {
+  let timer: number;
+  const [city, setCity] = useState<string>('');
+  const [weather, setWeather] = useState<OpenweatherWeather>();
+
+  const fetchWeather = async () => {
+    try {
+      const coords = await getCoordinates(city);
+      console.log(coords);
+      if (coords.length === 0 || !coords[0].lat || !coords[0].lon) throw new Error('No coordinates');
+      const weather = await getWeather(coords[0].lat, coords[0].lon);
+      console.log(weather);
+      setWeather(weather);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  /**
+   * Esempio di "debounce"
+   */
+  // const search = (city: string | null | undefined) => {
+    // clearTimeout(timer);
+    // timer = setTimeout(() => {
+    //   console.log(city);
+    // }, 2000);
+  // }
+
   return (
     <IonPage>
       <IonHeader>
@@ -31,11 +48,11 @@ const Search: React.FC = () => {
         </IonHeader>
 
         <div className='weather-search'>
-          <IonSearchbar placeholder="Roma"></IonSearchbar>
-          <IonButton>Search</IonButton>
+          <IonSearchbar placeholder="Roma" onIonInput={(e) => setCity(e.detail.value ? e.detail.value : '')}></IonSearchbar>
+          <IonButton onClick={fetchWeather}>Search</IonButton>
         </div>
 
-        <WeatherCard {...weather} />
+        {weather ? <WeatherCard {...weather} /> : <p>Scrivi la città di cui vedere il meteo.</p>}
 
       </IonContent>
     </IonPage>

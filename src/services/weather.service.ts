@@ -6,7 +6,7 @@ const apiUrl = "https://api.openweathermap.org";
 const weatherEndpoint = "/data/2.5/weather";
 const geolocationEndpoint = "/geo/1.0/direct";
 
-const getCoordinates = async (cityName: string): Promise<OpenweatherGeolocation> => {
+const getCoordinates = async (cityName: string): Promise<OpenweatherGeolocation[]> => {
     try {
         // q=Roma&limit=1&appid=d3f33ac3bb96540ed07f938d7d432442
         const response: HttpResponse = await CapacitorHttp.get({
@@ -39,7 +39,6 @@ const getWeather = async (latitude: number, longitude: number): Promise<Openweat
         weather.date = timestampToDate(weather.dt);
         weather.main.temp = kelvinToCelsius(weather.main.temp);
         weather.main.feels_like = kelvinToCelsius(weather.main.feels_like);
-        console.log(weather)
         return weather;
     } catch (error) {
         console.error(error);
